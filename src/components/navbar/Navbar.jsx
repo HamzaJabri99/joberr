@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
+import { Link, useLocation } from "react-router-dom";
 const Navbar = () => {
   const [activeScroll, setActiveScroll] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
+  const {pathname}=useLocation();
   const currentUser = {
     id: 2,
     username: "jabri",
@@ -18,12 +20,12 @@ const Navbar = () => {
     };
   }, []);
   return (
-    <div className={activeScroll ? "navbar active" : "navbar"}>
+    <div className={activeScroll || pathname!=="/" ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
-          {/*<Link to="/">*/}
+          <Link to="/" className="link">
           <span className="text">joberr</span>
-          {/*</Link>*/}
+          </Link>
           <span className="dot">.</span>
         </div>
         <div className="links">
@@ -43,31 +45,31 @@ const Navbar = () => {
               {showOptions&&<div className="options">
                 {currentUser?.isSeller && (
                   <>
-                    <span>Gigs</span>
-                    <span>Add New Gig</span>
+                    <Link to="/mygigs" className="link">Gigs</Link>
+                    <Link to="/add" className="link">Add New Gig</Link>
                   </>
                 )}
-                <span>Orders</span>
-                <span>Messages</span>
-                <span>Logout</span>
+                <Link to="/orders" className="link">Orders</Link>
+                <Link to="/messages" className="link">Messages</Link>
+                <Link to="/" className="link">Logout</Link>
               </div>}
             </div>
           )}
         </div>
       </div>
-      {activeScroll && (
+      {(activeScroll||pathname!=="/") && (
         <>
           <hr />
           <div className="menu">
-            <span>Test</span>
-            <span>Test2</span>
-            <span>Test3</span>
-            <span>Test4</span>
-            <span>Test5</span>
-            <span>Test6</span>
-            <span>Test7</span>
-            <span>Test8</span>
-            <span>Test9</span>
+            <Link to="/" className="link">Video Editing</Link>
+            <Link to="/" className="link">3d Modeling</Link>
+            <Link to="/" className="link">Web Developement</Link>
+            <Link to="/" className="link">Digital Marketing</Link>
+            <Link to="/" className="link">AI Services</Link>
+            <Link to="/" className="link">Writing & Transition</Link>
+            <Link to="/" className="link">Graphics & Design</Link>
+            <Link to="/" className="link">Music & Audio</Link>
+            <Link to="/" className="link">Programming & Tech</Link>
           </div>
         </>
       )}
