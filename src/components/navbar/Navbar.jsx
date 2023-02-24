@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
 const Navbar = () => {
-  const [active, setActive] = useState(false);
+  const [activeScroll, setActiveScroll] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
+  const currentUser = {
+    id: 2,
+    username: "jabri",
+    isSeller: true,
+  };
   const scrololo = () => {
-    window.scrollY > 20 ? setActive(true) : setActive(false);
+    window.scrollY > 20 ? setActiveScroll(true) : setActiveScroll(false);
   };
   useEffect(() => {
     window.addEventListener("scroll", scrololo);
@@ -12,7 +18,7 @@ const Navbar = () => {
     };
   }, []);
   return (
-    <div className={active ? "navbar active" : "navbar"}>
+    <div className={activeScroll ? "navbar active" : "navbar"}>
       <div className="container">
         <div className="logo">
           {/*<Link to="/">*/}
@@ -24,12 +30,32 @@ const Navbar = () => {
           <span>Joberr Business</span>
           <span>Explore</span>
           <span>English</span>
-          <span>Become a Seller</span>
-          <span>Sign in</span>
-          <button>Join</button>
+          {!currentUser?.isSeller && <span>Become a Seller</span>}
+          {!currentUser && <span>Sign in</span>}
+          {!currentUser && <button>Join</button>}
+          {currentUser && (
+            <div onClick={()=>setShowOptions(!showOptions)} className="user">
+              <img
+                src="https://www.patterns.dev/img/reactjs/react-logo@3x.svg"
+                alt=""
+              />
+              <span>{currentUser?.username}</span>
+              {showOptions&&<div className="options">
+                {currentUser?.isSeller && (
+                  <>
+                    <span>Gigs</span>
+                    <span>Add New Gig</span>
+                  </>
+                )}
+                <span>Orders</span>
+                <span>Messages</span>
+                <span>Logout</span>
+              </div>}
+            </div>
+          )}
         </div>
       </div>
-      {active && (
+      {activeScroll && (
         <>
           <hr />
           <div className="menu">
