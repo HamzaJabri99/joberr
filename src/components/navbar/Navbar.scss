@@ -3,8 +3,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #6d006d;
+  background-color: #880088;
   color: white;
+  transition: all .5s ease;
+  position: sticky;
+  top: 0;
+  &.active{
+ background-color: white;
+ color:black;
+  }
   .container {
     width: 1400px;
     display: flex;
