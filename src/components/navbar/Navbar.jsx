@@ -11,7 +11,7 @@ const Navbar = () => {
     isSeller: true,
   };
   const scrololo = () => {
-    window.scrollY > 20 ? setActiveScroll(true) : setActiveScroll(false);
+    window.scrollY > 0 ? setActiveScroll(true) : setActiveScroll(false);
   };
   useEffect(() => {
     window.addEventListener("scroll", scrololo);

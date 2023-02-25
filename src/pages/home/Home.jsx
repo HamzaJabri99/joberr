@@ -3,8 +3,9 @@ import Featured from "../../components/featured/Featured";
 import TrustedBy from "../../components/trustedBy/TrustedBy";
 import Slide from "../../components/slider/Slide";
 import CatCard from "../../components/catCard/CatCard";
-import { cards } from "../../data";
+import { cards, projects } from "../../data";
 import "./Home.scss";
+import ProjectCard from "../../components/projectCard/ProjectCard";
 const Home = () => {
   return (
     <div className="home">
@@ -62,7 +63,10 @@ const Home = () => {
           <div className="item">
             <h1>joberr business</h1>
             <h1>A business solution designed for teams</h1>
-            <p>Upgrade to a curated experience packed with tools and benefits, dedicated to businesses</p>
+            <p>
+              Upgrade to a curated experience packed with tools and benefits,
+              dedicated to businesses
+            </p>
             <div className="title">
               <img src="./imgs/check.png" alt="" />
               Connect to freelancers with proven business experience
@@ -85,6 +89,11 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Slide arrowsScroll={4} slidesToShow={4}>
+        {projects.map((project) => {
+          return <ProjectCard item={project} key={project.id} />;
+        })}
+      </Slide>
     </div>
   );
 };
