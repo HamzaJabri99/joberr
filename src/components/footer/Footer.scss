@@ -1,0 +1,101 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  color: #74767e;
+  margin: 50px 0;
+  img{
+    width: 24px;
+    height: 24px;
+  }
+  .container {
+    width: 1400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .top {
+      display: flex;
+      justify-content: space-between;
+      gap: 100px;
+      .item {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        h2 {
+          font-size: 16px;
+          color: #000;
+        }
+        span {
+            font-size: 16px;
+            font-weight: 400;
+          p {
+            font-weight: 300;
+            color: #bebbbb;
+          }
+          &:hover {
+            cursor: pointer;
+            text-decoration:  underline;
+          }
+        }
+      }
+    }
+    hr{
+        margin: 50px 0;
+        height: 1px;
+        background-color: #d8d8d8;
+        border: none;
+    }
+    .bottom {
+        margin-top: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      .left {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        span{
+            font-size: 14px;
+        }
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        .socials{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            color: gray;
+            a{
+               
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                padding: 10px;
+                img{
+                   width: 20px;
+                   height: 20px;
+                   filter: brightness(0.8);
+                }
+                &:hover{
+                    background-color: #e8e8e8;
+                }
+            }
+        }
+        .link{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            border-radius: 20px;
+            padding: 10px;
+            &:hover{
+                background-color: #e8e8e8;
+            }
+        }
+      }
+    }
+  }
+}
