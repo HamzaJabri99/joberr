@@ -8,7 +8,7 @@ const Navbar = () => {
   const currentUser = {
     id: 2,
     username: "jabri",
-    isSeller: true,
+    isSeller: false,
   };
   const scrololo = () => {
     window.scrollY > 0 ? setActiveScroll(true) : setActiveScroll(false);
@@ -33,8 +33,8 @@ const Navbar = () => {
           <span>Explore</span>
           <span>English</span>
           {!currentUser?.isSeller && <span>Become a Seller</span>}
-          {!currentUser && <span>Sign in</span>}
-          {!currentUser && <button>Join</button>}
+          {!currentUser.isSeller && <span>Sign in</span>}
+          {!currentUser.isSeller && <button>Join</button>}
           {currentUser && (
             <div onClick={()=>setShowOptions(!showOptions)} className="user">
               <img
@@ -71,6 +71,7 @@ const Navbar = () => {
             <Link to="/" className="link">Music & Audio</Link>
             <Link to="/" className="link">Programming & Tech</Link>
           </div>
+          <hr />
         </>
       )}
     </div>
