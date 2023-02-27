@@ -20,6 +20,76 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      .left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #555;
+        font-weight: 300;
+        input {
+          padding: 5px;
+          border: 1px solid lightgray;
+          outline: none;
+          -moz-appearance: number;
+          -webkit-appearance: number;
+          appearance: "number";
+          &::placeholder {
+            color: gray;
+          }
+        }
+        button {
+          background-color: #1dbf73;
+          font-weight: 500;
+          padding: 5px 10px;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          outline: none;
+          cursor: pointer;
+        }
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        .sortBy {
+          color: #555;
+          font-weight: 300;
+        }
+        .sortType {
+          font-weight: 500;
+        }
+        img {
+          width: 15px;
+          height: 15px;
+          cursor: pointer;
+        }
+        .rightMenu {
+          position: absolute;
+          padding: 20px;
+          top: 30px;
+          right: 0;
+          background-color: white;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          border-radius: 5px;
+          border: 0.5px solid lightgray;
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          color: #555;
+          span{
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .cards{
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
     }
   }
 }
