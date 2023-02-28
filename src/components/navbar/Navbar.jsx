@@ -8,7 +8,7 @@ const Navbar = () => {
   const currentUser = {
     id: 2,
     username: "jabri",
-    isSeller: false,
+    isSeller: true,
   };
   const scrololo = () => {
     window.scrollY > 0 ? setActiveScroll(true) : setActiveScroll(false);
