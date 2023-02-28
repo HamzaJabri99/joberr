@@ -1,9 +1,110 @@
-import React from 'react'
-
+import React from "react";
+import "./Orders.scss";
+import { Link } from "react-router-dom";
 const Orders = () => {
   return (
-    <div>Orders</div>
-  )
-}
+    <div className="myGigs">
+      <div className="container">
+        <div className="title">
+          <h1>Orders</h1>
 
-export default Orders
+        </div>
+        <table>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Buyer</th>
+            <th>Contact</th>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://images.pexels.com/photos/1462935/pexels-photo-1462935.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                alt=""
+              />
+            </td>
+            <td>Ai Generated Image</td>
+            <td>59.99</td>
+            <td>10</td>
+            <td>
+              <img src="/imgs/delete.png" className="delete" alt="" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://images.pexels.com/photos/1462935/pexels-photo-1462935.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                alt=""
+              />
+            </td>
+            <td>Ai Generated Image</td>
+            <td>59.99</td>
+            <td>10</td>
+            <td>
+              <img src="/imgs/delete.png" className="delete" alt="" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://images.pexels.com/photos/1462935/pexels-photo-1462935.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                alt=""
+              />
+            </td>
+            <td>Ai Generated Image</td>
+            <td>59.99</td>
+            <td>10</td>
+            <td>
+              <img src="/imgs/delete.png" className="delete" alt="" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://images.pexels.com/photos/1462935/pexels-photo-1462935.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                alt=""
+              />
+            </td>
+            <td>Ai Generated Image</td>
+            <td>59.99</td>
+            <td>10</td>
+            <td>
+              <img src="/imgs/delete.png" className="delete" alt="" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://images.pexels.com/photos/1462935/pexels-photo-1462935.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                alt=""
+              />
+            </td>
+            <td>Ai Generated Image</td>
+            <td>59.99</td>
+            <td>10</td>
+            <td>
+              <img src="/imgs/delete.png" className="delete" alt="" />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://images.pexels.com/photos/1462935/pexels-photo-1462935.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                alt=""
+              />
+            </td>
+            <td>Ai Generated Image</td>
+            <td>59.99</td>
+            <td>10</td>
+            <td>
+              <img src="/imgs/delete.png" className="delete" alt="" />
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+export default Orders;
