@@ -9,6 +9,7 @@ import conversationRoute from "./routes/conversation.route.js";
 import messageRoute from "./routes/message.route.js";
 import reviewRoute from "./routes/review.route.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 const app = express();
 dotenv.config();
 mongoose.set("strictQuery", true);
@@ -20,8 +21,11 @@ const connect = async () => {
     console.log(err);
   }
 };
+//middlewares
+app.use(cors({ origin: "http://localhost:5173", credentials: true })); //allowing our application to access our api and to passing cookies from client to backend
 app.use(express.json());
 app.use(cookieParser());
+//endpoints
 app.use("/api/users", userRoute);
 app.use("/api/auth", authRoute);
 app.use("/api/gigs", gigRoute);
