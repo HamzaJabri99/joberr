@@ -1,21 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Register.scss";
 const Register = () => {
+  const [file, setFile] = useState(null);
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    password: "",
+    img: "",
+    country: "",
+    isSeller: false,
+    desc: "",
+  });
+  const handleChange = (e) => {
+    setUser((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+  const handleSeller = (e) => {
+    setUser((prev) => {
+      return { ...prev, isSeller: e.target.checked };
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(user);
+  };
   return (
     <div className="register">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="left">
           <h1>Create an account</h1>
           <label htmlFor="">Username</label>
-          <input name="username" type="text" placeholder="joeDoe" />
+          <input
+            name="username"
+            type="text"
+            placeholder="joeDoe"
+            onChange={handleChange}
+          />
           <label htmlFor="">Email</label>
-          <input name="email" type="email" placeholder="email" />
+          <input
+            name="email"
+            type="email"
+            placeholder="email"
+            onChange={handleChange}
+          />
           <label htmlFor="">Password</label>
-          <input name="password" type="password" />
+          <input name="password" type="password" onChange={handleChange} />
           <label htmlFor="">Profile Picture</label>
-          <input type="file" />
+          <input
+            type="file"
+            onChange={(e) => {
+              setFile(e.target.files[0]);
+            }}
+          />
           <label htmlFor="">Country</label>
-          <input name="country" type="text" placeholder="Usa" />
+          <input
+            name="country"
+            type="text"
+            placeholder="Morocco"
+            onChange={handleChange}
+          />
           <button type="submit">Register</button>
         </div>
         <div className="right">
@@ -23,12 +67,17 @@ const Register = () => {
           <div className="toggle">
             <label htmlFor="">Activate the seller account</label>
             <label className="switch">
-              <input type="checkbox" />
+              <input type="checkbox" onChange={handleSeller} />
               <span className="slider round"></span>
             </label>
           </div>
           <label htmlFor="">Phone Number</label>
-          <input name="phone" type="text" placeholder="+212 6 567 891 84" />
+          <input
+            name="phone"
+            type="text"
+            placeholder="+212 6 22 36 13 84"
+            onChange={handleChange}
+          />
           <label htmlFor="">Description</label>
           <textarea
             placeholder="A short description about you"
@@ -36,6 +85,7 @@ const Register = () => {
             id=""
             cols="30"
             rows="10"
+            onChange={handleChange}
           ></textarea>
         </div>
       </form>
