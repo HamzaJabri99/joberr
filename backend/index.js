@@ -22,7 +22,7 @@ const connect = async () => {
   }
 };
 //middlewares
-app.use(cors({ origin: "http://localhost:5173", credentials: true })); //allowing our application to access our api and to passing cookies from client to backend
+app.use(cors({ origin: "http://localhost:5173", credentials: true })); //allowing our application to access our api and to pass cookies from client to backend
 app.use(express.json());
 app.use(cookieParser());
 //endpoints
