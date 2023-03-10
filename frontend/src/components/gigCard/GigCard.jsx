@@ -2,35 +2,35 @@ import React from "react";
 import "./GigCard.scss";
 import { Link } from "react-router-dom";
 const GigCard = ({ item }) => {
-    return (
-      <Link to={`/gig/${item.id}`} className="link">
-        <div className="gigCard">
-          <img src={item.img} alt="" />
-          <div className="info">
-            <div className="user">
-              <img src={item.pp} alt="" />
-              <span>{item.username}</span>
-            </div>
-            <p>{item.desc}</p>
-            <div className="star">
-              <img src="../../../public/imgs/star.png" alt="" />
-              <span>{item.star}</span>
-            </div>
+  return (
+    <Link to={`/gig/${item._id}`} className="link">
+      <div className="gigCard">
+        <img src={item.img} alt="" />
+        <div className="info">
+          <div className="user">
+            <img src={item.pp} alt="" />
+            <span>{item.username}</span>
           </div>
-          <hr />
-          <div className="detail">
-            <img src="../../../public/imgs/heart.png" alt="" />
-            <div className="price">
-              <span>STARTING AT</span>
-              <h2>
-                $ {item.price}
-                <sup>99</sup>
-              </h2>
-            </div>
+          <p>{item.desc}</p>
+          <div className="star">
+            <img src="../../../public/imgs/star.png" alt="" />
+            <span>{item.star}</span>
           </div>
         </div>
-      </Link>
-    );
-  };
+        <hr />
+        <div className="detail">
+          <img src="../../../public/imgs/heart.png" alt="" />
+          <div className="price">
+            <span>STARTING AT</span>
+            <h2>
+              $ {item.price}
+              <sup>99</sup>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
 
 export default GigCard;

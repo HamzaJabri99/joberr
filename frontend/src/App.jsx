@@ -12,14 +12,22 @@ import Messages from "./pages/messages/Messages";
 import Add from "./pages/add/Add";
 import Register from "./pages/register/Register";
 import Login from "./pages/login/Login";
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from "@tanstack/react-query";
 import "./App.scss";
 function App() {
+  const queryClient = new QueryClient();
   const Layout = () => {
     return (
       <div className="App">
-        <Navbar />
-        <Outlet />
-        <Footer />
+        <QueryClientProvider client={queryClient}>
+          <Navbar />
+          <Outlet />
+          <Footer />
+        </QueryClientProvider>
       </div>
     );
   };

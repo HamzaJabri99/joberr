@@ -1,14 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Gigs.scss";
-import { gigs } from "../../data";
 import GigCard from "../../components/gigCard/GigCard";
+import { useQuery } from "@tanstack/react-query";
+import request from "../../utils/request";
+import { useLocation } from "react-router-dom";
 const Gigs = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [sortType, setSortType] = useState("Sales");
+  const minRef = useRef();
+  const maxRef = useRef();
+  const { search } = useLocation();
   const resort = (type) => {
     setSortType(type);
     setOpenMenu(false);
   };
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () =>
+      request
+        .get(
+          `/gigs${search}&min=${minRef.current.value}&max=${maxRef.current.value}&sort=${sortType}`
+        )
+        .then((res) => {
+          return res.data;
+        }),
+  });
+  useEffect(() => {
+    refetch();
+  }, [sortType]);
+  console.log(minRef);
   return (
     <div className="gigs">
       <div className="container">
@@ -23,9 +43,9 @@ const Gigs = () => {
         <div className="menu">
           <div className="left">
             <span>Budget</span>
-            <input type="text" placeholder="min" />
-            <input type="text" placeholder="max" />
-            <button>Apply</button>
+            <input ref={minRef} type="number" placeholder="min" min={5} />
+            <input ref={maxRef} type="number" placeholder="max" min={5} />
+            <button onClick={() => refetch()}>Apply</button>
           </div>
           <div className="right">
             <span className="sortBy">SortBy</span>
@@ -50,9 +70,11 @@ const Gigs = () => {
           </div>
         </div>
         <div className="cards">
-          {gigs.map((gig) => (
-            <GigCard key={gig.id} item={gig} />
-          ))}
+          {isLoading
+            ? "loading"
+            : error
+            ? "error"
+            : data.map((gig) => <GigCard key={gig._id} item={gig} />)}
         </div>
       </div>
     </div>
