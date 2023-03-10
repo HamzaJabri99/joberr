@@ -16,4 +16,15 @@ export const createGig = async (req, res, next) => {
     next(error);
   }
 };
-export const deleteGig = (req, res, next) => {};
+export const deleteGig = async (req, res, next) => {
+  try {
+    const gig = await Gig.findById(req.params.id);
+    if (!gig) return next(errorHandle(404, "There's no gig"));
+    if (gig.userId !== req.userId)
+      return next(errorHandle((403, "You're not the owner of this gig!")));
+    await Gig.findByIdAndDelete(req.params.id);
+    return res.status(200).send("Gig has been deleted");
+  } catch (error) {
+    next(error);
+  }
+};
