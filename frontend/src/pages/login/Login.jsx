@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
-import newRequest from "../../utils/request";
+import request from "../../utils/request";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await newRequest.post("/auth/login", { username, password });
+      const res = await request.post("/auth/login", { username, password });
       localStorage.setItem("currentUser", JSON.stringify(res.data));
       setError(null);
       navigate("/");

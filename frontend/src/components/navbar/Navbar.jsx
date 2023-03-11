@@ -48,7 +48,11 @@ const Navbar = () => {
               Sign in
             </Link>
           )}
-          {!currentUser?.isSeller && <button>Join</button>}
+          {!currentUser?.isSeller && (
+            <Link to={"/register"}>
+              <button>Join</button>
+            </Link>
+          )}
           {currentUser && (
             <div className="user" onClick={() => setShowOptions(!showOptions)}>
               <img src={currentUser.img || "/imgs/noavatar.jpg"} alt="" />

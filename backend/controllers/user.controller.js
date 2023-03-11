@@ -1,7 +1,13 @@
 import User from "../models/user.model.js";
 import errorHandle from "../utils/errorHandle.js";
-export const getUser = (req, res) => {
-  res.send("works as a charm");
+export const getUser = async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  if (!user) return next(errorHandle(404, "user not found"));
+  try {
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
 };
 export const deleteUser = async (req, res, next) => {
   const user = await User.findById(req.params.id);

@@ -6,7 +6,7 @@ import request from "../../utils/request";
 import { useLocation } from "react-router-dom";
 const Gigs = () => {
   const [openMenu, setOpenMenu] = useState(false);
-  const [sortType, setSortType] = useState("Sales");
+  const [sortType, setSortType] = useState("sales");
   const minRef = useRef();
   const maxRef = useRef();
   const { search } = useLocation();
@@ -15,7 +15,7 @@ const Gigs = () => {
     setOpenMenu(false);
   };
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ["repoData"],
+    queryKey: ["gigs"],
     queryFn: () =>
       request
         .get(
