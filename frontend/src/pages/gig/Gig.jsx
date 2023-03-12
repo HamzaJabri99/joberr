@@ -66,7 +66,7 @@ const Gig = () => {
             <h2>About This Gig</h2>
             <p>{data.desc}</p>
             {isLoadingUser ? (
-              <div class="lds-dual-ring"></div>
+              <div className="lds-dual-ring"></div>
             ) : errorUser ? (
               refetch()
             ) : (
