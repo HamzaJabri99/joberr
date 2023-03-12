@@ -8,7 +8,7 @@ import {
 import { verifyToken } from "../middleware/jwt.js";
 const router = express.Router();
 router.post("/", verifyToken, createGig);
-router.get("/", verifyToken, getGigs);
-router.get("/:id", verifyToken, getGig);
+router.get("/", getGigs);
+router.get("/:id", getGig);
 router.delete("/:id", verifyToken, deleteGig);
 export default router;
