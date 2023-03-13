@@ -8,17 +8,18 @@ import Reviews from "../../components/reviews/Reviews";
 const Gig = () => {
   const { id: gigId } = useParams();
   const { isLoading, error, data } = useQuery({
-    queryKey: ["singleGig"],
+    queryKey: ["gig"],
     queryFn: () => request.get(`/gigs/${gigId}`).then((res) => res.data),
   });
+  const userId = data?.userId;
   const {
     isLoading: isLoadingUser,
     error: errorUser,
     data: dataUser,
-    refetch,
   } = useQuery({
-    queryKey: ["gigUser"],
-    queryFn: () => request.get(`/users/${data.userId}`).then((res) => res.data),
+    queryKey: [userId],
+    queryFn: () => request.get(`/users/${userId}`).then((res) => res.data),
+    enabled: !!userId,
   });
 
   return (
@@ -37,7 +38,7 @@ const Gig = () => {
             {isLoadingUser ? (
               "loading.."
             ) : errorUser ? (
-              refetch()
+              "error"
             ) : (
               <div className="user">
                 <img
@@ -59,7 +60,7 @@ const Gig = () => {
               </div>
             )}
             <Slider slidesToShow={1} arrowsScroll={1} className="slider">
-              {data.imgs.map((img) => (
+              {data?.imgs?.map((img) => (
                 <img key={img} src={img} alt="" />
               ))}
             </Slider>
@@ -76,15 +77,15 @@ const Gig = () => {
                   <img src={dataUser.img || "/imgs/noavatar.jpg"} alt="" />
                   <div className="info">
                     <span>{dataUser.username}</span>
-                    {!isNaN(data.totalStars / data.starNumber) && (
+                    {!isNaN(data?.totalStars / data?.starNumber) && (
                       <div className="stars">
-                        {Array(Math.round(data.totalStars / data.starNumber))
+                        {Array(Math.round(data?.totalStars / data?.starNumber))
                           .fill()
                           .map((star, i) => (
                             <img key={i} src="/imgs/star.png" alt="" />
                           ))}
                         <span>
-                          {Math.round(data.totalStars / data.starNumber)}
+                          {Math.round(data?.totalStars / data?.starNumber)}
                         </span>
                       </div>
                     )}
@@ -95,11 +96,11 @@ const Gig = () => {
                   <div className="items">
                     <div className="item">
                       <span className="title">From</span>
-                      <span className="desc">{dataUser.country}</span>
+                      <span className="desc">{dataUser?.country}</span>
                     </div>
                     <div className="item">
                       <span className="title">Member since</span>
-                      <span className="desc">{dataUser.createdAt}</span>
+                      <span className="desc">{dataUser?.createdAt}</span>
                     </div>
                     <div className="item">
                       <span className="title">Avg. response time</span>
@@ -123,22 +124,22 @@ const Gig = () => {
           </div>
           <div className="right">
             <div className="price">
-              <h3>{data.shortTitle}</h3>
-              <h2>$ {data.price}</h2>
+              <h3>{data?.shortTitle}</h3>
+              <h2>$ {data?.price}</h2>
             </div>
-            <p>{data.shortDesc}</p>
+            <p>{data?.shortDesc}</p>
             <div className="details">
               <div className="item">
                 <img src="/imgs/clock.png" alt="" />
-                <span>{data.delivery} Days Delivery</span>
+                <span>{data?.delivery} Days Delivery</span>
               </div>
               <div className="item">
                 <img src="/imgs/recycle.png" alt="" />
-                <span>{data.revisionNumber} Revisions</span>
+                <span>{data?.revisionNumber} Revisions</span>
               </div>
             </div>
             <div className="features">
-              {data.features.map((feature) => (
+              {data?.features.map((feature) => (
                 <div className="item" key={feature}>
                   <img src="/imgs/greencheck.png" alt="" />
                   <span>{feature}</span>
