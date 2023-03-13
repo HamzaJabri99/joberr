@@ -3,8 +3,9 @@ import errorHandle from "../utils/errorHandle.js";
 export const getUser = async (req, res, next) => {
   const user = await User.findById(req.params.id);
   if (!user) return next(errorHandle(404, "user not found"));
+  const { password, ...info } = user._doc;
   try {
-    res.status(200).json(user);
+    res.status(200).json(info);
   } catch (error) {
     next(error);
   }
