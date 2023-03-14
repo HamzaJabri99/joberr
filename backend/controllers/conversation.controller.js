@@ -22,8 +22,7 @@ export const updateConversation = async (req, res, next) => {
       { id: req.params.id },
       {
         $set: {
-          readBySeller: req.isSeller,
-          readByBuyer: !req.isSeller,
+          ...(req.isSeller ? { readBySeller: true } : { readByBuyer: true }),
         },
       },
       { new: true }
@@ -47,7 +46,7 @@ export const getConversation = async (req, res, next) => {
 export const getConversations = async (req, res, next) => {
   try {
     const conversations = await Conversation.find(
-      ...(req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId })
+      req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }
     );
     if (!conversations)
       return next(errorHandle(404, "no conversation was found"));

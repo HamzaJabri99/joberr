@@ -1,6 +1,6 @@
 import axios from "axios";
-const newRequest = axios.create({
+const request = axios.create({
   baseURL: "http://localhost:8800/api/",
   withCredentials: true,
 });
-export default newRequest;
+export default request;
