@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
 import "./Orders.scss";
 import { useQuery } from "@tanstack/react-query";
 import request from "../../utils/request";
-import axios from "axios";
 import UserOrder from "../../components/userOrderTd/UserOrderTd";
 const Orders = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
