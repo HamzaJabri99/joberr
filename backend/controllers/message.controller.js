@@ -1,11 +1,11 @@
-import Conversation from "../models/conversation.model";
-import Message from "../models/message.model";
-import errorHandle from "../utils/errorHandle";
+import Conversation from "../models/conversation.model.js";
+import Message from "../models/message.model.js";
+import errorHandle from "../utils/errorHandle.js";
 
 export const getMessages = async (req, res, next) => {
   try {
-    const messages = await Message.find({ conversationId: req.params.convId });
-
+    const messages = await Message.find({ conversationId: req.params.id });
+    if (!messages) return next(errorHandle(404, "no messages found"));
     res.status(200).json(messages);
   } catch (error) {
     next(error);

@@ -1,54 +1,64 @@
 import React from "react";
 import "./Message.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import request from "../../utils/request";
+import UserMessageImg from "../../components/UserMessageImg/UserMessageImg";
 const Message = () => {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const { id } = useParams();
+  const queryClient = useQueryClient();
+  const { isLoading, error, data } = useQuery({
+    queryKey: [`messages`],
+    queryFn: () => request.get(`/messages/${id}`).then((res) => res.data),
+  });
+  const mutation = useMutation({
+    mutationFn: (message) => {
+      return request.post("/messages", message);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["messages"]); //refetch our messages if the op successful
+    },
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const desc = e.target[0].value;
+    const conversationId = id;
+    if (desc.length < 3 || conversationId.length === 0) return false;
+
+    mutation.mutate({ desc, conversationId });
+    e.target[0].value = "";
+  };
   return (
     <div className="message">
       <div className="container">
         <span className="breadCrumbs">
-          <Link to={"/messages"} className="link">MESSAGES {">"} Jotaro Kujo</Link>
+          <Link to={"/messages"} className="link">
+            MESSAGES {">"} Jotaro Kujo
+          </Link>
         </span>
-        <div className="messages">
-          <div className="item">
-            <img
-              src="https://avatars.githubusercontent.com/u/75950318?v=4"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt
-              eveniet provident quibusdam velit ab dolorum nostrum quis
-              temporibus, ratione nesciunt aut aperiam maiores repudiandae eos
-              architecto a ullam facere! Consequuntur.
-            </p>
+        {isLoading ? (
+          "loading..."
+        ) : error ? (
+          "error"
+        ) : (
+          <div className="messages">
+            {data.map((msg) => (
+              <div
+                className={
+                  currentUser._id === msg.userId ? "item owner" : "item"
+                }
+                key={msg._id}
+              >
+                <UserMessageImg id={msg.userId} />
+                <p>{msg.desc}</p>
+              </div>
+            ))}
           </div>
-          <div className="item owner">
-            <img
-              src="https://avatars.githubusercontent.com/u/75950318?v=4"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt
-              eveniet provident quibusdam velit ab dolorum nostrum quis
-              temporibus, ratione nesciunt aut aperiam maiores repudiandae eos
-              architecto a ullam facere! Consequuntur.
-            </p>
-          </div>
-          <div className="item">
-            <img
-              src="https://avatars.githubusercontent.com/u/75950318?v=4"
-              alt=""
-            />
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt
-              eveniet provident quibusdam velit ab dolorum nostrum quis
-              temporibus, ratione nesciunt aut aperiam maiores repudiandae eos
-              architecto a ullam facere! Consequuntur.
-            </p>
-          </div>
-          
-        </div>
+        )}
+
         <hr />
-        <div className="write">
+        <form className="write" onSubmit={handleSubmit}>
           <textarea
             name=""
             placeholder="write a message"
@@ -56,8 +66,8 @@ const Message = () => {
             cols="30"
             rows="10"
           ></textarea>
-          <button>Send</button>
-        </div>
+          <button type="submit">Send</button>
+        </form>
       </div>
     </div>
   );
