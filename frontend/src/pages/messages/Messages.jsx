@@ -1,13 +1,13 @@
 import React from "react";
 import "./Messages.scss";
 import { Link } from "react-router-dom";
-import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
+import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import request from "../../utils/request";
 import moment from "moment";
 import UserOrderTd from "../../components/userOrderTd/UserOrderTd";
 const Messages = () => {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const { isLoading, error, data } = useQuery({
     queryKey: ["conversations"],
     queryFn: () => request.get("/conversations").then((res) => res.data),
