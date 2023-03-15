@@ -63,7 +63,7 @@ const Messages = () => {
                     }
                   />
                   <td>
-                    <Link to="/message/2" className="link">
+                    <Link to={`/message/${conversation.id}`} className="link">
                       {conversation?.lastMessage?.substring(0, 100)}...
                     </Link>
                   </td>
