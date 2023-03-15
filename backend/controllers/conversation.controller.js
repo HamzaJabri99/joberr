@@ -47,7 +47,7 @@ export const getConversations = async (req, res, next) => {
   try {
     const conversations = await Conversation.find(
       req.isSeller ? { sellerId: req.userId } : { buyerId: req.userId }
-    );
+    ).sort({ updatedAt: -1 });
     if (!conversations)
       return next(errorHandle(404, "no conversation was found"));
     return res.status(200).json(conversations);
