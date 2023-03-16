@@ -48,6 +48,7 @@ export const intent = async (req, res, next) => {
     clientSecret: paymentIntent.client_secret,
   });
 };
+
 export const getOrders = async (req, res, next) => {
   try {
     const orders = await Order.find({
@@ -56,6 +57,19 @@ export const getOrders = async (req, res, next) => {
     });
     if (!orders) return next(errorHandle(404, "there are no orders!"));
     return res.status(200).json(orders);
+  } catch (error) {
+    next(error);
+  }
+};
+export const confirm = async (req, res, next) => {
+  try {
+    const order = await Order.findOneAndUpdate(
+      {
+        payment_intent: req.body.payment_intent,
+      },
+      { $set: { isCompleted: true } }
+    );
+    res.status(200).send("Order has been confirmed");
   } catch (error) {
     next(error);
   }
