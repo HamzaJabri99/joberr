@@ -18,6 +18,8 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import "./App.scss";
+import Success from "./pages/success/Success";
+import Payment from "./pages/payment/Payment";
 function App() {
   const queryClient = new QueryClient();
   const Layout = () => {
@@ -75,6 +77,14 @@ function App() {
         {
           path: "/register",
           element: <Register />,
+        },
+        {
+          path: "/pay/:id",
+          element: <Payment />,
+        },
+        {
+          path: "/success",
+          element: <Success />,
         },
       ],
     },
