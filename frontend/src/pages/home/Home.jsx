@@ -3,19 +3,32 @@ import Featured from "../../components/featured/Featured";
 import TrustedBy from "../../components/trustedBy/TrustedBy";
 import Slide from "../../components/slider/Slide";
 import CatCard from "../../components/catCard/CatCard";
+import { useQuery } from "@tanstack/react-query";
 import { cards, projects } from "../../data";
 import "./Home.scss";
 import ProjectCard from "../../components/projectCard/ProjectCard";
+import request from "../../utils/request";
 const Home = () => {
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => request.get("/categories").then((res) => res.data),
+  });
+
   return (
     <div className="home">
       <Featured />
       <TrustedBy />
-      <Slide arrowsScroll={5} slidesToShow={5}>
-        {cards.map((card) => {
-          return <CatCard key={card.id} item={card} />;
-        })}
-      </Slide>
+      {isLoading ? (
+        "loading..."
+      ) : error ? (
+        "error"
+      ) : (
+        <Slide arrowsScroll={5} slidesToShow={5}>
+          {data.map((card) => {
+            return <CatCard key={card._id} item={card} />;
+          })}
+        </Slide>
+      )}
       <div className="features">
         <div className="container">
           <div className="item">
