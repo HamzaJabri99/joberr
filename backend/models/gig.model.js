@@ -62,10 +62,6 @@ const gigSchema = new Schema(
       type: Number,
       default: 0,
     },
-    category_id: {
-      type: String,
-      required: true,
-    },
   },
   {
     timestamps: true,

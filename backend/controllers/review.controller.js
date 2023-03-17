@@ -28,7 +28,7 @@ export const createReview = async (req, res, next) => {
     });
     if (rev) return next(errorHandle(403, "You can't Review More than Once"));
     const savedReview = await review.save();
-    Gig.findOneAndUpdate(req.body.gigId, {
+    await Gig.findOneAndUpdate(req.body.gigId, {
       $inc: { totalStars: req.body.star, starNumber: 1 },
     });
     res.status(201).send(savedReview);
